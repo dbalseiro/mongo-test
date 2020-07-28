@@ -28,9 +28,13 @@ instance Default Settings where
 main :: IO ()
 main = do
   Settings{..} <- getSettings def
+
+  putStrLn $ "Connecting to " ++ show (Host dbhost dbport)
+
   pipe <- if dbtls
              then TLS.connect dbhost dbport
              else connect (Host dbhost dbport)
+
   let execute = access pipe master dbname
 
   case (dbuser, dbpass) of
