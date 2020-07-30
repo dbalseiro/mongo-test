@@ -3,18 +3,7 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages:
-- completed:
-    name: mongoDB
-    version: 2.7.0.1
-    git: git@github.com:dbalseiro/mongodb.git
-    pantry-tree:
-      size: 2191
-      sha256: 9273cd4fb05b86baa49759525c4c1df00e6089af01d54b28667281e5a0b77421
-    commit: 7f83416ddfb77bfcf8642872f4d0f62628073952
-  original:
-    git: git@github.com:dbalseiro/mongodb.git
-    commit: 7f83416ddfb77bfcf8642872f4d0f62628073952
+packages: []
 snapshots:
 - completed:
     size: 531932

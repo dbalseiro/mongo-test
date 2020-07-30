@@ -36,13 +36,14 @@ main = do
              else connect (Host dbhost dbport)
 
   let execute = access pipe master dbname
+  let readonly = access pipe slaveOk dbname
 
   case (dbuser, dbpass) of
     (Nothing, _) -> return ()
     (Just _, Nothing) -> error "password missing"
     (Just user, Just pass) -> void $ execute (authMongoCR user pass)
 
-  void $ execute run
+  void $ readonly run
   close pipe
 
 getSettings :: Settings -> IO Settings
@@ -57,10 +58,12 @@ getSettings Settings{..} =
       lookupWithDefault d = pure . fromMaybe d <=< lookupEnv
 
 run :: Action IO ()
-run = allClients >>= printDocs "All Clients"
+run = do
+  allClients >>= printDocs "All Clients"
+  count (select [] "clients") >>= liftIO . print
 
 allClients :: Action IO [Document]
-allClients = rest =<< find (select [] "clients")
+allClients = findCommand (select [] "clients") >>= rest
 
 printDocs :: String -> [Document] -> Action IO ()
 printDocs title docs = liftIO $ putStrLn title >> mapM_ (print . exclude ["_id"]) docs

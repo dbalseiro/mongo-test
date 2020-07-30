@@ -2,11 +2,11 @@ resolver: lts-16.7
 
 packages:
 - .
-# - ../mongodb
+- /home/dbalseiro/work/hh/mongodb
 
 extra-deps:
-- git: git@github.com:dbalseiro/mongodb.git
-  commit: 7f83416ddfb77bfcf8642872f4d0f62628073952
+# - git: git@github.com:dbalseiro/mongodb.git
+#   commit: 7f83416ddfb77bfcf8642872f4d0f62628073952
 
 flags:
   mongoDB:
